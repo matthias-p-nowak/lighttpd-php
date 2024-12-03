@@ -1,0 +1,24 @@
+
+services:
+  box1:
+    build:
+      context: build
+    develop:
+      watch:
+        - path: ./build
+          action: rebuild
+        - path: docker-compose.yaml
+          action: rebuild
+    networks:
+      backbone:
+    volumes: 
+      - ./output:/output
+      - ./live:/live
+    command: sleep 86400
+    ports:
+      - 8080:80
+
+networks:
+  backbone:
+    name: backbone
+    # external: true
